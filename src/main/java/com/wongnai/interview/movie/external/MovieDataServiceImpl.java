@@ -1,5 +1,10 @@
 package com.wongnai.interview.movie.external;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;z
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestOperations;
@@ -23,7 +28,16 @@ public class MovieDataServiceImpl implements MovieDataService {
 		// Step 1 => Implement this method to download data from MOVIE_DATA_URL and fix any error you may found.
 		// Please noted that you must only read data remotely and only from given source,
 		// do not download and use local file or put the file anywhere else.
-
-		return null;
+		try {
+			URL url = new URL(MOVIE_DATA_URL);
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("GET");
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			MoviesResponse m = objectMapper.readValue(in,MoviesResponse.class);
+			in.close();
+			return m;
+		} catch(Exception e) {
+			return null;
+		}
 	}
 }

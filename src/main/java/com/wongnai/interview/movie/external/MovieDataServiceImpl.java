@@ -3,7 +3,7 @@ package com.wongnai.interview.movie.external;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.io.BufferedReader;
-import java.io.InputStreamReader;z
+import java.io.InputStreamReader;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
